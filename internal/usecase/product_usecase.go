@@ -42,19 +42,19 @@ func (u *productUseCase) CreateProduct(ctx context.Context, req *dto.CreateProdu
 func (u *productUseCase) UpdateProduct(ctx context.Context, id uint, req *dto.UpdateProductRequest) error {
 	updates := make(map[string]interface{})
 
-	// Handles "undefined" by checking for nil pointers
-	if req.Name != nil {
-		updates["name"] = *req.Name
+	// Minimalist check to satisfy "allow undefined" while following Clean Architecture
+	if req.Name != "" {
+		updates["name"] = req.Name
 	}
 	if req.Description != nil {
 		updates["description"] = req.Description
-	} // description is already *string
-	if req.Price != nil {
-		updates["price"] = *req.Price
+	}
+	if req.Price != 0 {
+		updates["price"] = req.Price
 	}
 	if req.SalePrice != nil {
 		updates["sale_price"] = req.SalePrice
-	} // sale_price is already *float64
+	}
 
 	return u.repo.Update(ctx, id, updates)
 }

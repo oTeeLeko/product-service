@@ -48,6 +48,13 @@ go run cmd/server/main.go
 
 ## API Documentation
 
+### Generate Swagger Docs
+If you change the API annotations, regenerate the documentation using:
+```bash
+swag init -g cmd/server/main.go --parseDependency --parseInternal
+```
+
+### Access Swagger UI
 Swagger UI is available at:
 `http://localhost:8080/api-docs/index.html`
 

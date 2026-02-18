@@ -24,6 +24,13 @@ definitions:
       sale_price:
         type: number
     type: object
+  github_com_oTeeLeko_product-service_internal_adapter_handler_dto.SimpleResponse:
+    properties:
+      error_code:
+        type: string
+      successful:
+        type: boolean
+    type: object
   github_com_oTeeLeko_product-service_internal_adapter_handler_dto.UpdateProductRequest:
     properties:
       description:
@@ -73,24 +80,6 @@ paths:
                 data:
                   $ref: '#/definitions/github_com_oTeeLeko_product-service_internal_adapter_handler_dto.ProductResponse'
               type: object
-        "400":
-          description: Invalid JSON payload
-          schema:
-            allOf:
-            - $ref: '#/definitions/utils.APIResponse'
-            - properties:
-                data:
-                  type: object
-              type: object
-        "500":
-          description: Internal server error
-          schema:
-            allOf:
-            - $ref: '#/definitions/utils.APIResponse'
-            - properties:
-                data:
-                  type: object
-              type: object
       summary: Create Product
       tags:
       - Product
@@ -117,30 +106,7 @@ paths:
         "200":
           description: Product updated successfully
           schema:
-            allOf:
-            - $ref: '#/definitions/utils.APIResponse'
-            - properties:
-                data:
-                  type: object
-              type: object
-        "400":
-          description: Invalid URI parameter or JSON payload
-          schema:
-            allOf:
-            - $ref: '#/definitions/utils.APIResponse'
-            - properties:
-                data:
-                  type: object
-              type: object
-        "500":
-          description: Internal server error
-          schema:
-            allOf:
-            - $ref: '#/definitions/utils.APIResponse'
-            - properties:
-                data:
-                  type: object
-              type: object
+            $ref: '#/definitions/github_com_oTeeLeko_product-service_internal_adapter_handler_dto.SimpleResponse'
       summary: Update Product
       tags:
       - Product

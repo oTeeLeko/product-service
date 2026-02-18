@@ -16,9 +16,9 @@ type ProductResponse struct {
 }
 
 type UpdateProductRequest struct {
-	Name        *string  `json:"name,omitempty"`
+	Name        string   `json:"name"`
 	Description *string  `json:"description"`
-	Price       *float64 `json:"price,omitempty"`
+	Price       float64  `json:"price"`
 	SalePrice   *float64 `json:"sale_price"`
 }
 

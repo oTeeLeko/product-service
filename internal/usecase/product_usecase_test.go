@@ -9,7 +9,6 @@ import (
 	"github.com/oTeeLeko/product-service/internal/domain/entity"
 )
 
-// Manual Mock Repository
 type mockProductRepo struct {
 	createFunc func(ctx context.Context, product *entity.Product) error
 	updateFunc func(ctx context.Context, id uint, updates map[string]interface{}) error
@@ -50,14 +49,13 @@ func TestProductUseCase_CreateProduct(t *testing.T) {
 func TestProductUseCase_UpdateProduct_Error(t *testing.T) {
 	mockRepo := &mockProductRepo{
 		updateFunc: func(ctx context.Context, id uint, updates map[string]interface{}) error {
-			return errors.New("update failed")
+			return errors.New("update error")
 		},
 	}
 
 	useCase := NewProductUseCase(mockRepo)
-	name := "Updated Name"
 	req := &dto.UpdateProductRequest{
-		Name: &name,
+		Name: "Updated Name",
 	}
 
 	err := useCase.UpdateProduct(context.Background(), 1, req)

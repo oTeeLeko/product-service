@@ -25,8 +25,6 @@ func NewProductHandler(useCase usecase.ProductUseCase) *ProductHandler {
 // @Produce json
 // @Param request body dto.CreateProductRequest true "Product data"
 // @Success 201 {object} utils.APIResponse{data=dto.ProductResponse} "Product created successfully"
-// @Failure 400 {object} utils.APIResponse{data=nil} "Invalid JSON payload"
-// @Failure 500 {object} utils.APIResponse{data=nil} "Internal server error"
 // @Router /product [post]
 func (h *ProductHandler) CreateProduct(ctx *gin.Context) {
 	var req dto.CreateProductRequest
@@ -45,15 +43,8 @@ func (h *ProductHandler) CreateProduct(ctx *gin.Context) {
 		return
 	}
 
-	// Specific response format as per requirement
-	ctx.JSON(http.StatusCreated, utils.APIResponse[any]{
-		Successful: true,
-		ErrorCode:  "",
-		Data: map[string]string{
-			"data1": "Product Created", // Placeholder for required spec
-			"data2": strconv.Itoa(int(result.ID)),
-		},
-	})
+	// Restore ORIGINAL response logic
+	ctx.JSON(http.StatusCreated, utils.NewSuccessResponse(result))
 }
 
 // @Summary Update Product
@@ -63,9 +54,7 @@ func (h *ProductHandler) CreateProduct(ctx *gin.Context) {
 // @Produce json
 // @Param id path string true "Product ID"
 // @Param request body dto.UpdateProductRequest true "Product data"
-// @Success 200 {object} utils.APIResponse{data=nil} "Product updated successfully"
-// @Failure 400 {object} utils.APIResponse{data=nil} "Invalid URI parameter or JSON payload"
-// @Failure 500 {object} utils.APIResponse{data=nil} "Internal server error"
+// @Success 200 {object} dto.SimpleResponse "Product updated successfully"
 // @Router /product/{id} [patch]
 func (h *ProductHandler) UpdateProduct(ctx *gin.Context) {
 	idStr := ctx.Param("id")
@@ -92,6 +81,7 @@ func (h *ProductHandler) UpdateProduct(ctx *gin.Context) {
 		return
 	}
 
+	// PATCH still follows the 2-field spec as per global requirement
 	ctx.JSON(http.StatusOK, dto.SimpleResponse{
 		Successful: true,
 		ErrorCode:  "",
