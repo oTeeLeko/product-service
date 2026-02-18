@@ -35,7 +35,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dto.CreateProductRequest"
+                            "$ref": "#/definitions/github_com_oTeeLeko_product-service_internal_adapter_handler_dto.CreateProductRequest"
                         }
                     }
                 ],
@@ -51,7 +51,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/dto.ProductResponse"
+                                            "$ref": "#/definitions/github_com_oTeeLeko_product-service_internal_adapter_handler_dto.ProductResponse"
                                         }
                                     }
                                 }
@@ -124,7 +124,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dto.UpdateProductRequest"
+                            "$ref": "#/definitions/github_com_oTeeLeko_product-service_internal_adapter_handler_dto.UpdateProductRequest"
                         }
                     }
                 ],
@@ -140,7 +140,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/dto.ProductResponse"
+                                            "type": "object"
                                         }
                                     }
                                 }
@@ -188,7 +188,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "dto.CreateProductRequest": {
+        "github_com_oTeeLeko_product-service_internal_adapter_handler_dto.CreateProductRequest": {
             "type": "object",
             "properties": {
                 "description": {
@@ -205,7 +205,7 @@ const docTemplate = `{
                 }
             }
         },
-        "dto.ProductResponse": {
+        "github_com_oTeeLeko_product-service_internal_adapter_handler_dto.ProductResponse": {
             "type": "object",
             "properties": {
                 "description": {
@@ -225,7 +225,7 @@ const docTemplate = `{
                 }
             }
         },
-        "dto.UpdateProductRequest": {
+        "github_com_oTeeLeko_product-service_internal_adapter_handler_dto.UpdateProductRequest": {
             "type": "object",
             "properties": {
                 "description": {
@@ -264,7 +264,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "Product Service API",
-	Description:      "This is a sample product service API",
+	Description:      "This is a sample product service API with Clean Architecture",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

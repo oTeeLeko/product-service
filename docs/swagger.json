@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a sample product service API",
+        "description": "This is a sample product service API with Clean Architecture",
         "title": "Product Service API",
         "contact": {},
         "version": "1.0"
@@ -28,7 +28,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dto.CreateProductRequest"
+                            "$ref": "#/definitions/github_com_oTeeLeko_product-service_internal_adapter_handler_dto.CreateProductRequest"
                         }
                     }
                 ],
@@ -44,7 +44,7 @@
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/dto.ProductResponse"
+                                            "$ref": "#/definitions/github_com_oTeeLeko_product-service_internal_adapter_handler_dto.ProductResponse"
                                         }
                                     }
                                 }
@@ -117,7 +117,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dto.UpdateProductRequest"
+                            "$ref": "#/definitions/github_com_oTeeLeko_product-service_internal_adapter_handler_dto.UpdateProductRequest"
                         }
                     }
                 ],
@@ -133,7 +133,7 @@
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/dto.ProductResponse"
+                                            "type": "object"
                                         }
                                     }
                                 }
@@ -181,7 +181,7 @@
         }
     },
     "definitions": {
-        "dto.CreateProductRequest": {
+        "github_com_oTeeLeko_product-service_internal_adapter_handler_dto.CreateProductRequest": {
             "type": "object",
             "properties": {
                 "description": {
@@ -198,7 +198,7 @@
                 }
             }
         },
-        "dto.ProductResponse": {
+        "github_com_oTeeLeko_product-service_internal_adapter_handler_dto.ProductResponse": {
             "type": "object",
             "properties": {
                 "description": {
@@ -218,7 +218,7 @@
                 }
             }
         },
-        "dto.UpdateProductRequest": {
+        "github_com_oTeeLeko_product-service_internal_adapter_handler_dto.UpdateProductRequest": {
             "type": "object",
             "properties": {
                 "description": {

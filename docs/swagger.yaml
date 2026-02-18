@@ -1,6 +1,6 @@
 basePath: /
 definitions:
-  dto.CreateProductRequest:
+  github_com_oTeeLeko_product-service_internal_adapter_handler_dto.CreateProductRequest:
     properties:
       description:
         type: string
@@ -11,7 +11,7 @@ definitions:
       sale_price:
         type: number
     type: object
-  dto.ProductResponse:
+  github_com_oTeeLeko_product-service_internal_adapter_handler_dto.ProductResponse:
     properties:
       description:
         type: string
@@ -24,7 +24,7 @@ definitions:
       sale_price:
         type: number
     type: object
-  dto.UpdateProductRequest:
+  github_com_oTeeLeko_product-service_internal_adapter_handler_dto.UpdateProductRequest:
     properties:
       description:
         type: string
@@ -45,7 +45,7 @@ definitions:
     type: object
 info:
   contact: {}
-  description: This is a sample product service API
+  description: This is a sample product service API with Clean Architecture
   title: Product Service API
   version: "1.0"
 paths:
@@ -60,7 +60,7 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/dto.CreateProductRequest'
+          $ref: '#/definitions/github_com_oTeeLeko_product-service_internal_adapter_handler_dto.CreateProductRequest'
       produces:
       - application/json
       responses:
@@ -71,7 +71,7 @@ paths:
             - $ref: '#/definitions/utils.APIResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/dto.ProductResponse'
+                  $ref: '#/definitions/github_com_oTeeLeko_product-service_internal_adapter_handler_dto.ProductResponse'
               type: object
         "400":
           description: Invalid JSON payload
@@ -110,7 +110,7 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/dto.UpdateProductRequest'
+          $ref: '#/definitions/github_com_oTeeLeko_product-service_internal_adapter_handler_dto.UpdateProductRequest'
       produces:
       - application/json
       responses:
@@ -121,7 +121,7 @@ paths:
             - $ref: '#/definitions/utils.APIResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/dto.ProductResponse'
+                  type: object
               type: object
         "400":
           description: Invalid URI parameter or JSON payload

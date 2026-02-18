@@ -11,7 +11,6 @@ import (
 )
 
 func LogActivity(ctx *gin.Context) {
-	// กำหนด timezone เป็นเวลาไทย
 	location, err := time.LoadLocation("Asia/Bangkok")
 	if err != nil {
 		location = time.UTC
@@ -22,7 +21,6 @@ func LogActivity(ctx *gin.Context) {
 	month := now.Format("Jan")
 	fullDate := now.Format("2006-01-02")
 
-	// แยก access log
 	logDir := filepath.Join("./logs", year, month, "access")
 	logFile := filepath.Join(logDir, fullDate+".txt")
 
@@ -45,12 +43,9 @@ func LogActivity(ctx *gin.Context) {
 
 	var params string
 
-	// Log query parameters
 	if len(ctx.Request.URL.Query()) > 0 {
 		params += "Query: " + ctx.Request.URL.Query().Encode() + " "
 	}
-
-	// Custom body logging สำหรับ POST methods
 	if method == "POST" || method == "PUT" || method == "PATCH" {
 		if body, exists := ctx.Get("requestBody"); exists {
 			if bodyStr, ok := body.(string); ok && bodyStr != "" {
@@ -70,12 +65,10 @@ func LogActivity(ctx *gin.Context) {
 	logger.Println(logMessage)
 }
 
-// LogInterfacer allows structs to define their own logging format
 type LogInterfacer interface {
 	LogInfo() string
 }
 
-// LogError records error logs with optional details
 func LogError(ctx *gin.Context, errorMsg string, errorDetails ...interface{}) {
 	location, err := time.LoadLocation("Asia/Bangkok")
 	if err != nil {
@@ -107,7 +100,6 @@ func LogError(ctx *gin.Context, errorMsg string, errorDetails ...interface{}) {
 	ip := ctx.ClientIP()
 	status := ctx.Writer.Status()
 
-	// ดึง request body ที่เก็บไว้
 	requestBody := ""
 	if body, exists := ctx.Get("requestBody"); exists {
 		if bodyStr, ok := body.(string); ok && bodyStr != "" {
@@ -115,7 +107,6 @@ func LogError(ctx *gin.Context, errorMsg string, errorDetails ...interface{}) {
 		}
 	}
 
-	// ดึง query parameters
 	params := ""
 	if len(ctx.Request.URL.Query()) > 0 {
 		params = fmt.Sprintf(" - Query: %s", ctx.Request.URL.Query().Encode())
@@ -125,7 +116,6 @@ func LogError(ctx *gin.Context, errorMsg string, errorDetails ...interface{}) {
 		now.Format("2006-01-02 15:04:05"), ip, status, method, path, errorMsg, params, requestBody)
 
 	if len(errorDetails) > 0 {
-		// Prepare details string
 		detailsStr := ""
 		for _, detail := range errorDetails {
 			if loggable, ok := detail.(LogInterfacer); ok {
@@ -135,7 +125,7 @@ func LogError(ctx *gin.Context, errorMsg string, errorDetails ...interface{}) {
 			}
 		}
 		if len(detailsStr) > 2 {
-			detailsStr = detailsStr[:len(detailsStr)-2] // remove trailing comma
+			detailsStr = detailsStr[:len(detailsStr)-2]
 		}
 		logMessage += fmt.Sprintf(" - Details: [%s]", detailsStr)
 	}

@@ -31,13 +31,11 @@ func NewErrorResponse(status int) APIResponse[any] {
 	}
 }
 
-// ParseError returns the appropriate HTTP status code based on the error type
 func ParseError(err error) int {
 	if err == nil {
 		return http.StatusOK
 	}
 
-	// 1. GORM / Database Errors
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		return http.StatusNotFound
 	}
@@ -45,17 +43,14 @@ func ParseError(err error) int {
 		return http.StatusConflict
 	}
 
-	// 2. Validation / Binding Errors
 	var ve validator.ValidationErrors
 	if errors.As(err, &ve) {
 		return http.StatusBadRequest
 	}
 
-	// 3. Known HTTP errors (if any)
 	if httpErr, ok := err.(interface{ StatusCode() int }); ok {
 		return httpErr.StatusCode()
 	}
 
-	// Default to 500
 	return http.StatusInternalServerError
 }
